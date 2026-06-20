@@ -32,7 +32,7 @@ export const Header = ({
         queryKey: ["card-logs", data.id]
       });
 
-      toast.success(`Renamed to "${data.title}"`);
+      toast.success(`Đã đổi tên thành "${data.title}"`);
       setTitle(data.title);
     },
     onError: (error) => {
@@ -77,7 +77,7 @@ export const Header = ({
           />
         </form>
         <p className="text-sm text-muted-foreground">
-          in list <span className="underline">{data.list.title}</span>
+          trong danh sách <span className="underline">{data.list.title}</span>
         </p>
       </div>
     </div>

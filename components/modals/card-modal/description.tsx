@@ -58,7 +58,7 @@ export const Description = ({
       queryClient.invalidateQueries({
         queryKey: ["card-logs", data.id]
       });
-      toast.success(`Card "${data.title}" updated`);
+      toast.success(`Thẻ "${data.title}" đã được cập nhật`);
       disableEditing();
     },
     onError: (error) => {
@@ -82,7 +82,7 @@ export const Description = ({
       <AlignLeft className="h-5 w-5 mt-0.5 text-neutral-700" />
       <div className="w-full">
         <p className="font-semibold text-neutral-700 mb-2">
-          Description
+          Mô tả
         </p>
         {isEditing ? (
           <form
@@ -93,14 +93,14 @@ export const Description = ({
             <FormTextarea
               id="description"
               className="w-full mt-2"
-              placeholder="Add a more detailed description"
+              placeholder="Thêm mô tả chi tiết hơn"
               defaultValue={data.description || undefined}
               errors={fieldErrors}
               ref={textareaRef}
             />
             <div className="flex items-center gap-x-2">
               <FormSubmit>
-                Save
+                Lưu
               </FormSubmit>
               <Button
                 type="button"
@@ -108,7 +108,7 @@ export const Description = ({
                 size="sm"
                 variant="ghost"
               >
-                Cancel
+                Hủy
               </Button>
             </div>
           </form>
@@ -118,7 +118,7 @@ export const Description = ({
             role="button"
             className="min-h-[78px] bg-neutral-200 text-sm font-medium py-3 px-3.5 rounded-md"
           >
-            {data.description || "Add a more detailed description..."}
+            {data.description || "Thêm mô tả chi tiết hơn..."}
           </div>
         )}
       </div>

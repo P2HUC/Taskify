@@ -3,7 +3,7 @@ import { clerkClient } from "@clerk/nextjs/server";
 
 export async function POST() {
   try {
-    const email = "guest@taskify.com";
+    const email = "guest@z-up.com";
     const password = "GuestPassword123!";
 
     // 1. Try to find the user in Clerk

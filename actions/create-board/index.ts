@@ -21,7 +21,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
 
   if (!userId || !orgId) {
     return {
-      error: "Unauthorized",
+      error: "Không có quyền truy cập",
     };
   }
 
@@ -30,7 +30,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
 
   if (!canCreate && !isPro) {
     return {
-      error: "You have reached your limit of free boards. Please upgrade to create more."
+      error: "Bạn đã đạt tới giới hạn số bảng miễn phí. Vui lòng nâng cấp để tạo thêm."
     }
   }
 
@@ -46,7 +46,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
 
   if (!imageId || !imageThumbUrl || !imageFullUrl || !imageUserName || !imageLinkHTML) {
     return {
-      error: "Missing fields. Failed to create board."
+      error: "Thiếu thông tin. Không thể tạo bảng."
     };
   }
 
@@ -77,7 +77,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     })
   } catch (error) {
     return {
-      error: "Failed to create."
+      error: "Không thể tạo bảng."
     }
   }
 

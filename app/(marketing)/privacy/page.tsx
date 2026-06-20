@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
 const textFont = Poppins({
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
   weight: [
     "100",
     "200",
@@ -30,7 +30,7 @@ const PrivacyPage = () => {
         <Button variant="link" className="p-0 text-neutral-500 hover:text-neutral-800 hover:no-underline transition gap-x-2" asChild>
           <Link href="/">
             <ArrowLeft className="h-4 w-4" />
-            Back to Home
+            Quay lại trang chủ
           </Link>
         </Button>
       </div>
@@ -42,79 +42,79 @@ const PrivacyPage = () => {
           </div>
           <div>
             <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-neutral-900">
-              Privacy Policy
+              Chính sách Bảo mật
             </h1>
             <p className="text-xs text-neutral-500 mt-1">
-              Last updated: June 19, 2026
+              Cập nhật lần cuối: 19 tháng 6, 2026
             </p>
           </div>
         </div>
 
         <div className="prose prose-neutral max-w-none space-y-6 text-sm md:text-base leading-relaxed text-neutral-600">
           <p>
-            At Taskify, accessible from taskify.com (and all associated applications), one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by Taskify and how we use it.
+            Tại Z-up, có thể truy cập được từ z-up.com (và tất cả các ứng dụng liên kết), một trong những ưu tiên hàng đầu của chúng tôi là quyền riêng tư của khách truy cập. Tài liệu Chính sách Bảo mật này chứa các loại thông tin được Z-up thu thập, ghi lại và cách chúng tôi sử dụng thông tin đó.
           </p>
 
           <h2 className="text-lg md:text-xl font-semibold text-neutral-900 pt-4 border-t">
-            1. Information We Collect
+            1. Thông tin Chúng tôi Thu thập
           </h2>
           <p>
-            We collect several different types of information for various purposes to provide and improve our Service to you:
+            Chúng tôi thu thập nhiều loại thông tin khác nhau cho các mục đích khác nhau để cung cấp và cải thiện Dịch vụ của mình cho bạn:
           </p>
           <ul className="list-disc pl-5 space-y-2">
-            <li><strong>Personal Data:</strong> While using our Service, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you, such as your email address, name, and profile picture (facilitated by our authentication provider Clerk).</li>
-            <li><strong>Usage Data:</strong> We may also collect information on how the Service is accessed and used. This may include information such as your computer&apos;s Internet Protocol address (e.g. IP address), browser type, browser version, the pages of our Service that you visit, the time and date of your visit, the time spent on those pages, and other diagnostic data.</li>
-            <li><strong>Task and Board Data:</strong> As a task management platform, we store the content you create, including board titles, list titles, card titles, descriptions, comments, and activity logs.</li>
+            <li><strong>Dữ liệu Cá nhân:</strong> Trong khi sử dụng Dịch vụ, chúng tôi có thể yêu cầu bạn cung cấp một số thông tin nhận dạng cá nhân có thể được sử dụng để liên hệ hoặc xác định danh tính của bạn, chẳng hạn như địa chỉ email, tên và ảnh hồ sơ (được cung cấp bởi Clerk - nhà cung cấp dịch vụ xác thực của chúng tôi).</li>
+            <li><strong>Dữ liệu Sử dụng:</strong> Chúng tôi cũng có thể thu thập thông tin về cách truy cập và sử dụng Dịch vụ. Thông tin này có thể bao gồm địa chỉ Giao thức Internet của máy tính (ví dụ: địa chỉ IP), loại trình duyệt, phiên bản trình duyệt, các trang thuộc Dịch vụ của chúng tôi mà bạn truy cập, thời gian và ngày bạn truy cập, thời gian dành cho các trang đó và các dữ liệu chẩn đoán khác.</li>
+            <li><strong>Dữ liệu Thẻ và Bảng công việc:</strong> Là một nền tảng quản lý công việc, chúng tôi lưu trữ nội dung bạn tạo, bao gồm tiêu đề bảng, tiêu đề danh sách, tiêu đề thẻ, mô tả, bình luận và nhật ký hoạt động.</li>
           </ul>
 
           <h2 className="text-lg md:text-xl font-semibold text-neutral-900 pt-4 border-t">
-            2. How We Use Your Data
+            2. Cách Chúng tôi Sử dụng Dữ liệu của Bạn
           </h2>
           <p>
-            Taskify uses the collected data for various purposes:
+            Z-up sử dụng dữ liệu được thu thập cho các mục đích khác nhau:
           </p>
           <ul className="list-disc pl-5 space-y-2">
-            <li>To provide and maintain our Service.</li>
-            <li>To notify you about changes to our Service.</li>
-            <li>To allow you to participate in interactive features of our Service when you choose to do so.</li>
-            <li>To provide customer support and collect valuable feedback to improve the Service.</li>
-            <li>To monitor the usage of our Service and detect, prevent, and address technical issues.</li>
+            <li>Để cung cấp và duy trì Dịch vụ của chúng tôi.</li>
+            <li>Để thông báo cho bạn về những thay đổi đối với Dịch vụ.</li>
+            <li>Để cho phép bạn tham gia vào các tính năng tương tác của Dịch vụ khi bạn chọn làm như vậy.</li>
+            <li>Để cung cấp dịch vụ hỗ trợ khách hàng và thu thập các phản hồi giá trị nhằm cải thiện Dịch vụ.</li>
+            <li>Để theo dõi việc sử dụng Dịch vụ và phát hiện, ngăn ngừa và khắc phục các sự cố kỹ thuật.</li>
           </ul>
 
           <h2 className="text-lg md:text-xl font-semibold text-neutral-900 pt-4 border-t">
-            3. Security of Data
+            3. Bảo mật Dữ liệu
           </h2>
           <p>
-            The security of your data is important to us, but remember that no method of transmission over the Internet, or method of electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your Personal Data, we cannot guarantee its absolute security.
+            Bảo mật dữ liệu của bạn là điều vô cùng quan trọng đối với chúng tôi, nhưng hãy nhớ rằng không có phương thức truyền tải nào qua Internet hoặc phương thức lưu trữ điện tử nào là an toàn 100%. Mặc dù chúng tôi cố gắng sử dụng các phương tiện được chấp nhận về mặt thương mại để bảo vệ Dữ liệu Cá nhân của bạn, chúng tôi không thể đảm bảo an toàn tuyệt đối.
           </p>
 
           <h2 className="text-lg md:text-xl font-semibold text-neutral-900 pt-4 border-t">
-            4. Service Providers
+            4. Nhà cung cấp Dịch vụ
           </h2>
           <p>
-            We may employ third-party companies and individuals to facilitate our Service, to provide the Service on our behalf, to perform Service-related services, or to assist us in analyzing how our Service is used. These third parties have access to your Personal Data only to perform these tasks on our behalf and are obligated not to disclose or use it for any other purpose.
+            Chúng tôi có thể thuê các công ty và cá nhân bên thứ ba để tạo điều kiện thuận lợi cho Dịch vụ, thay mặt chúng tôi cung cấp Dịch vụ, thực hiện các dịch vụ liên quan đến Dịch vụ hoặc hỗ trợ chúng tôi phân tích cách sử dụng Dịch vụ. Các bên thứ ba này chỉ có quyền truy cập vào Dữ liệu Cá nhân của bạn để thực hiện các nhiệm vụ này thay mặt chúng tôi và có nghĩa vụ không tiết lộ hoặc sử dụng dữ liệu đó cho bất kỳ mục đích nào khác.
           </p>
           <ul className="list-disc pl-5 space-y-2">
-            <li><strong>Authentication:</strong> Clerk</li>
-            <li><strong>Database & Hosting:</strong> Prisma, Supabase, Vercel</li>
-            <li><strong>Payment Processing:</strong> Stripe</li>
+            <li><strong>Xác thực tài khoản:</strong> Clerk</li>
+            <li><strong>Cơ sở dữ liệu & Lưu trữ:</strong> Prisma, Supabase, Vercel</li>
+            <li><strong>Xử lý Thanh toán:</strong> Stripe</li>
           </ul>
 
           <h2 className="text-lg md:text-xl font-semibold text-neutral-900 pt-4 border-t">
-            5. Changes to This Privacy Policy
+            5. Thay đổi đối với Chính sách Bảo mật này
           </h2>
           <p>
-            We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the &quot;last updated&quot; date at the top of this Privacy Policy.
+            Chúng tôi có thể cập nhật Chính sách Bảo mật của mình theo thời gian. Chúng tôi sẽ thông báo cho bạn về bất kỳ thay đổi nào bằng cách đăng Chính sách Bảo mật mới trên trang này và cập nhật ngày &quot;cập nhật lần cuối&quot; ở đầu Chính sách Bảo mật.
           </p>
 
           <h2 className="text-lg md:text-xl font-semibold text-neutral-900 pt-4 border-t">
-            6. Contact Us
+            6. Liên hệ với Chúng tôi
           </h2>
           <p>
-            If you have any questions about this Privacy Policy, please contact us:
+            Nếu bạn có bất kỳ câu hỏi nào về Chính sách Bảo mật này, vui lòng liên hệ với chúng tôi:
           </p>
           <ul className="list-disc pl-5 space-y-2">
-            <li>By email: support@taskify.com</li>
+            <li>Qua email: support@z-up.com</li>
           </ul>
         </div>
       </div>

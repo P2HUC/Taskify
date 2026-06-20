@@ -11,12 +11,12 @@ export const Footer = () => {
         <div className="space-x-4 md:block md:w-auto flex items-center justify-between w-full">
           <Button size="sm" variant="ghost" asChild>
             <Link href="/privacy">
-              Privacy Policy
+              Chính sách bảo mật
             </Link>
           </Button>
           <Button size="sm" variant="ghost" asChild>
             <Link href="/terms">
-              Terms of Service
+              Điều khoản dịch vụ
             </Link>
           </Button>
         </div>

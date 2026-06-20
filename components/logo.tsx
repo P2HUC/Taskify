@@ -15,14 +15,14 @@ export const Logo = () => {
         <Image
           src="/logo.svg"
           alt="Logo"
-          height={30}
-          width={30}
+          height={46}
+          width={46}
         />
         <p className={cn(
-          "text-lg text-neutral-700 pb-1",
+          "text-2xl text-neutral-700",
           headingFont.className,
         )}>
-          Taskify
+          Z-up
         </p>
       </div>
     </Link>

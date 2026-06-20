@@ -27,7 +27,7 @@ export const Actions = ({
     isLoading: isLoadingCopy,
   } = useAction(copyCard, {
     onSuccess: (data) => {
-      toast.success(`Card "${data.title}" copied`);
+      toast.success(`Thẻ "${data.title}" đã được sao chép`);
       cardModal.onClose();
     },
     onError: (error) => {
@@ -40,7 +40,7 @@ export const Actions = ({
     isLoading: isLoadingDelete,
   } = useAction(deleteCard, {
     onSuccess: (data) => {
-      toast.success(`Card "${data.title}" deleted`);
+      toast.success(`Thẻ "${data.title}" đã được xóa`);
       cardModal.onClose();
     },
     onError: (error) => {
@@ -69,7 +69,7 @@ export const Actions = ({
   return (
     <div className="space-y-2 mt-2">
       <p className="text-xs font-semibold">
-        Actions
+        Thao tác
       </p>
       <Button
         onClick={onCopy}
@@ -79,7 +79,7 @@ export const Actions = ({
         size="inline"
       >
         <Copy className="h-4 w-4 mr-2" />
-        Copy
+        Sao chép
       </Button>
       <Button
         onClick={onDelete}
@@ -89,7 +89,7 @@ export const Actions = ({
         size="inline"
       >
         <Trash className="h-4 w-4 mr-2" />
-        Delete
+        Xóa
       </Button>
     </div>
   );

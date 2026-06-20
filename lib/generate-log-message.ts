@@ -3,14 +3,29 @@ import { ACTION, AuditLog } from "@prisma/client";
 export const generateLogMessage = (log: AuditLog) => {
   const { action, entityTitle, entityType } = log;
 
+  let entityTypeVi = "";
+  switch (entityType) {
+    case "BOARD":
+      entityTypeVi = "bảng";
+      break;
+    case "LIST":
+      entityTypeVi = "danh sách";
+      break;
+    case "CARD":
+      entityTypeVi = "thẻ";
+      break;
+    default:
+      entityTypeVi = (entityType as string).toLowerCase();
+  }
+
   switch (action) {
     case ACTION.CREATE:
-      return `created ${entityType.toLowerCase()} "${entityTitle}"`;
+      return `đã tạo ${entityTypeVi} "${entityTitle}"`;
     case ACTION.UPDATE:
-      return `updated ${entityType.toLowerCase()} "${entityTitle}"`;
+      return `đã cập nhật ${entityTypeVi} "${entityTitle}"`;
     case ACTION.DELETE:
-      return `deleted ${entityType.toLowerCase()} "${entityTitle}"`;
+      return `đã xóa ${entityTypeVi} "${entityTitle}"`;
     default:
-      return `unknown action ${entityType.toLowerCase()} "${entityTitle}"`;
+      return `hành động không xác định đối với ${entityTypeVi} "${entityTitle}"`;
   };
 };

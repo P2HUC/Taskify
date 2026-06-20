@@ -59,17 +59,17 @@ export const GuestLoginButton = ({
           organization: data.organizationId,
         });
 
-        toast.success("Welcome! Logged in as Guest.");
+        toast.success("Chào mừng! Đăng nhập dưới tư cách Khách.");
         
         // Redirect directly to the organization page
         router.push(`/organization/${data.organizationId}`);
       } else {
         console.error("Sign-in status: ", signInAttempt.status);
-        toast.error("Could not complete guest sign-in. Status: " + signInAttempt.status);
+        toast.error("Không thể hoàn tất đăng nhập khách. Trạng thái: " + signInAttempt.status);
       }
     } catch (error: any) {
       console.error("GUEST_LOGIN_ERROR", error);
-      toast.error(error?.message || "An error occurred during guest login");
+      toast.error(error?.message || "Đã xảy ra lỗi khi đăng nhập khách");
     } finally {
       setIsLoading(false);
     }
@@ -88,7 +88,7 @@ export const GuestLoginButton = ({
       ) : (
         <Sparkles className="h-4 w-4" />
       )}
-      {children || (isLoading ? "Logging in..." : "Login as Guest")}
+      {children || (isLoading ? "Đang đăng nhập..." : "Đăng nhập với vai trò Khách")}
     </Button>
   );
 };

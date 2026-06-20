@@ -34,7 +34,7 @@ export const BoardList = async () => {
     <div className="space-y-4">
       <div className="flex items-center font-semibold text-lg text-neutral-700">
         <User2 className="h-6 w-6 mr-2" />
-        Your boards
+        Bảng của bạn
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
         {boards.map((board) => (
@@ -55,14 +55,14 @@ export const BoardList = async () => {
             role="button"
             className="aspect-video relative h-full w-full bg-muted rounded-sm flex flex-col gap-y-1 items-center justify-center hover:opacity-75 transition"
           >
-            <p className="text-sm">Create new board</p>
+            <p className="text-sm">Tạo bảng mới</p>
             <span className="text-xs">
-              {isPro ? "Unlimited" : `${MAX_FREE_BOARDS - availableCount} remaining`}
+              {isPro ? "Không giới hạn" : `Còn lại ${MAX_FREE_BOARDS - availableCount}`}
             </span>
             <Hint
               sideOffset={40}
               description={`
-                Free Workspaces can have up to 5 open boards. For unlimited boards upgrade this workspace.
+                Không gian làm việc miễn phí có thể có tối đa 5 bảng đang mở. Để có số lượng bảng không giới hạn, hãy nâng cấp không gian làm việc này.
               `}
             >
               <HelpCircle

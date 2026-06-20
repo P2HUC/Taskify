@@ -41,17 +41,17 @@ export const ProModal = () => {
         </div>
         <div className="text-neutral-700 mx-auto space-y-6 p-6">
           <h2 className="font-semibold text-xl">
-            Upgrade to Taskify Pro Today!
+            Nâng cấp lên Z-up Pro ngay hôm nay!
           </h2>
           <p className="text-xs font-semibold text-neutral-600">
-            Explore the best of Taskify
+            Khám phá những điều tuyệt vời nhất của Z-up
           </p>
           <div className="pl-3">
             <ul className="text-sm list-disc">
-              <li>Unlimited boards</li>
-              <li>Advanced checklists</li>
-              <li>Admin and security features</li>
-              <li>And more!</li>
+              <li>Không giới hạn số lượng bảng</li>
+              <li>Danh sách kiểm tra nâng cao</li>
+              <li>Các tính năng quản lý và bảo mật</li>
+              <li>Và nhiều hơn thế nữa!</li>
             </ul>
           </div>
           <Button
@@ -60,7 +60,7 @@ export const ProModal = () => {
             className="w-full"
             variant="primary"
           >
-            Upgrade
+            Nâng cấp
           </Button>
         </div>
       </DialogContent>

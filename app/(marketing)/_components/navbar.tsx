@@ -12,13 +12,13 @@ export const Navbar = () => {
         <div className="flex items-center justify-between w-full md:w-auto md:justify-end gap-x-2">
           <Button size="sm" variant="outline" asChild>
             <Link href="/sign-in">
-              Login
+              Đăng nhập
             </Link>
           </Button>
           <GuestLoginButton size="sm" variant="outline" className="hidden md:inline-flex" />
           <Button size="sm" asChild>
             <Link href="/sign-up">
-              Get Taskify for free
+              Sử dụng Z-up miễn phí
             </Link>
           </Button>
         </div>

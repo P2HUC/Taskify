@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
 const textFont = Poppins({
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
   weight: [
     "100",
     "200",
@@ -30,7 +30,7 @@ const TermsPage = () => {
         <Button variant="link" className="p-0 text-neutral-500 hover:text-neutral-800 hover:no-underline transition gap-x-2" asChild>
           <Link href="/">
             <ArrowLeft className="h-4 w-4" />
-            Back to Home
+            Quay lại trang chủ
           </Link>
         </Button>
       </div>
@@ -42,93 +42,93 @@ const TermsPage = () => {
           </div>
           <div>
             <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-neutral-900">
-              Terms of Service
+              Điều khoản Dịch vụ
             </h1>
             <p className="text-xs text-neutral-500 mt-1">
-              Last updated: June 19, 2026
+              Cập nhật lần cuối: 19 tháng 6, 2026
             </p>
           </div>
         </div>
 
         <div className="prose prose-neutral max-w-none space-y-6 text-sm md:text-base leading-relaxed text-neutral-600">
           <p>
-            Welcome to Taskify! These Terms of Service (&quot;Terms&quot;) govern your access to and use of our website, apps, and services. Please read them carefully before using our platform.
+            Chào mừng bạn đến với Z-up! Các Điều khoản Dịch vụ này (&quot;Điều khoản&quot;) điều chỉnh việc bạn truy cập và sử dụng trang web, ứng dụng và dịch vụ của chúng tôi. Vui lòng đọc kỹ trước khi sử dụng nền tảng của chúng tôi.
           </p>
 
           <h2 className="text-lg md:text-xl font-semibold text-neutral-900 pt-4 border-t">
-            1. Acceptance of Terms
+            1. Chấp thuận các Điều khoản
           </h2>
           <p>
-            By accessing or using our Service, you agree to be bound by these Terms and our Privacy Policy. If you do not agree to all the terms and conditions, then you may not access or use the Service.
+            Bằng cách truy cập hoặc sử dụng Dịch vụ của chúng tôi, bạn đồng ý tuân thủ các Điều khoản này và Chính sách Bảo mật của chúng tôi. Nếu bạn không đồng ý với tất cả các điều khoản và điều kiện, bạn không được phép truy cập hoặc sử dụng Dịch vụ.
           </p>
 
           <h2 className="text-lg md:text-xl font-semibold text-neutral-900 pt-4 border-t">
-            2. Description of Service
+            2. Mô tả Dịch vụ
           </h2>
           <p>
-            Taskify is a web-based task management software designed to help teams collaborate, organize projects, and manage workflow boards, lists, cards, and checklists.
+            Z-up là một phần mềm quản lý công việc trên nền tảng web được thiết kế để giúp các nhóm cộng tác, tổ chức các dự án và quản lý các bảng công việc, danh sách, thẻ và danh sách kiểm tra.
           </p>
 
           <h2 className="text-lg md:text-xl font-semibold text-neutral-900 pt-4 border-t">
-            3. Account Registration & Security
+            3. Đăng ký Tài khoản & Bảo mật
           </h2>
           <p>
-            To use certain features of the Service, you must register for an account using Clerk (our third-party authentication provider). You agree to:
+            Để sử dụng một số tính năng nhất định của Dịch vụ, bạn phải đăng ký tài khoản thông qua Clerk (nhà cung cấp dịch vụ xác thực bên thứ ba của chúng tôi). Bạn đồng ý:
           </p>
           <ul className="list-disc pl-5 space-y-2">
-            <li>Provide accurate, current, and complete information.</li>
-            <li>Maintain the security of your password and accept all risks of unauthorized access to your account data.</li>
-            <li>Promptly notify us if you discover or suspect any security breaches related to the Service.</li>
+            <li>Cung cấp thông tin chính xác, cập nhật và đầy đủ.</li>
+            <li>Duy trì tính bảo mật cho mật khẩu của bạn và chấp nhận mọi rủi ro liên quan đến việc truy cập trái phép vào dữ liệu tài khoản của bạn.</li>
+            <li>Thông báo ngay cho chúng tôi nếu bạn phát hiện hoặc nghi ngờ bất kỳ vi phạm bảo mật nào liên quan đến Dịch vụ.</li>
           </ul>
 
           <h2 className="text-lg md:text-xl font-semibold text-neutral-900 pt-4 border-t">
-            4. User Content & Conduct
+            4. Nội dung & Hành vi của Người dùng
           </h2>
           <p>
-            You are entirely responsible for the content you upload, post, or otherwise transmit via the Service (including board descriptions, card titles, lists, and comments). You agree not to upload content that:
+            Bạn hoàn toàn chịu trách nhiệm về nội dung mình tải lên, đăng tải hoặc truyền tải qua Dịch vụ (bao gồm mô tả bảng, tiêu đề thẻ, danh sách và bình luận). Bạn đồng ý không tải lên các nội dung:
           </p>
           <ul className="list-disc pl-5 space-y-2">
-            <li>Is unlawful, harmful, threatening, abusive, harassing, tortious, defamatory, or invasive of another&apos;s privacy.</li>
-            <li>Infringes any patent, trademark, trade secret, copyright, or other proprietary rights of any party.</li>
-            <li>Contains software viruses or any other computer code designed to interrupt, destroy, or limit the functionality of the Service.</li>
+            <li>Bất hợp pháp, có hại, đe dọa, lạm dụng, quấy rối, sai trái, phỉ báng hoặc xâm phạm quyền riêng tư của người khác.</li>
+            <li>Xâm phạm bất kỳ bằng sáng chế, nhãn hiệu, bí mật kinh doanh, bản quyền hoặc quyền sở hữu trí tuệ nào khác của bất kỳ bên nào.</li>
+            <li>Chứa virus phần mềm hoặc bất kỳ mã máy tính nào khác được thiết kế để gây gián đoạn, phá hủy hoặc hạn chế chức năng của Dịch vụ.</li>
           </ul>
 
           <h2 className="text-lg md:text-xl font-semibold text-neutral-900 pt-4 border-t">
-            5. Subscriptions and Payments
+            5. Gói đăng ký và Thanh toán
           </h2>
           <p>
-            Certain parts of the Service are billed on a subscription basis using Stripe. You will be billed in advance on a recurring and periodic basis. We reserve the right to modify subscription fees or add new charges at any time, with prior notice.
+            Một số phần của Dịch vụ được tính phí trên cơ sở đăng ký trả phí thông qua Stripe. Bạn sẽ được lập hóa đơn trước theo chu kỳ định kỳ. Chúng tôi có quyền sửa đổi phí đăng ký hoặc bổ sung các khoản phí mới bất kỳ lúc nào với thông báo trước.
           </p>
 
           <h2 className="text-lg md:text-xl font-semibold text-neutral-900 pt-4 border-t">
-            6. Limitation of Liability
+            6. Giới hạn Trách nhiệm
           </h2>
           <p>
-            In no event shall Taskify, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from your access to or use of or inability to access or use the Service.
+            Trong mọi trường hợp, Z-up, cũng như các giám đốc, nhân viên, đối tác, đại lý, nhà cung cấp hoặc chi nhánh của chúng tôi, sẽ không chịu trách nhiệm cho bất kỳ thiệt hại gián tiếp, ngẫu nhiên, đặc biệt, mang tính hệ quả hoặc trừng phạt nào, bao gồm nhưng không giới hạn ở tổn thất lợi nhuận, dữ liệu, sử dụng, uy tín hoặc các tổn thất vô hình khác, phát sinh từ việc bạn truy cập, sử dụng hoặc không thể truy cập hoặc sử dụng Dịch vụ.
           </p>
 
           <h2 className="text-lg md:text-xl font-semibold text-neutral-900 pt-4 border-t">
-            7. Termination
+            7. Chấm dứt
           </h2>
           <p>
-            We may terminate or suspend your account and bar access to the Service immediately, without prior notice or liability, under our sole discretion, for any reason whatsoever, including without limitation if you breach the Terms.
+            Chúng tôi có thể chấm dứt hoặc đình chỉ tài khoản của bạn và chặn quyền truy cập vào Dịch vụ ngay lập tức, không cần thông báo trước hoặc chịu trách nhiệm pháp lý, theo quyết định riêng của chúng tôi, vì bất kỳ lý do gì, bao gồm nhưng không giới hạn ở việc bạn vi phạm Điều khoản.
           </p>
 
           <h2 className="text-lg md:text-xl font-semibold text-neutral-900 pt-4 border-t">
-            8. Governing Law
+            8. Luật Điều chỉnh
           </h2>
           <p>
-            These Terms shall be governed and construed in accordance with the laws of the jurisdiction in which Taskify operates, without regard to its conflict of law provisions.
+            Các Điều khoản này sẽ được điều chỉnh và giải thích theo luật pháp của khu vực tài phán nơi Z-up hoạt động, bất kể các quy định về xung đột pháp luật.
           </p>
 
           <h2 className="text-lg md:text-xl font-semibold text-neutral-900 pt-4 border-t">
-            9. Contact Us
+            9. Liên hệ với Chúng tôi
           </h2>
           <p>
-            If you have any questions about these Terms, please contact us:
+            Nếu bạn có bất kỳ câu hỏi nào về các Điều khoản này, vui lòng liên hệ với chúng tôi:
           </p>
           <ul className="list-disc pl-5 space-y-2">
-            <li>By email: support@taskify.com</li>
+            <li>Qua email: support@z-up.com</li>
           </ul>
         </div>
       </div>

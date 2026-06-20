@@ -6,7 +6,7 @@ import { Toaster } from "sonner";
 
 import { siteConfig } from '@/config/site'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin', 'vietnamese'] })
 
 export const metadata: Metadata = {
   title: {
