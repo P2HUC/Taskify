@@ -9,13 +9,15 @@ import { defaultImages } from "@/constants/images";
 
 // Helper for regex-based fallback parser (English & Vietnamese)
 function parseMessageLocally(message: string) {
-  const text = message.toLowerCase().trim();
+  // Strip trailing punctuation like periods/question marks and whitespace to prevent regex matching failures
+  const cleanMessage = message.replace(/[.?!\s]+$/, "").trim();
+  const text = cleanMessage.toLowerCase();
   let action: string | null = null;
   let payload: any = {};
   let responseMessage = "";
 
   if (text.includes("xóa thẻ") || text.includes("delete card") || text.includes("xóa card")) {
-    const deleteMatch = message.match(/(?:xóa thẻ|delete card|xóa card)\s+["']?(.+?)["']?\s+(?:trong danh sách|in list|trong list)\s+["']?(.+?)["']?$/i);
+    const deleteMatch = cleanMessage.match(/(?:xóa thẻ|delete card|xóa card)\s+["']?(.+?)["']?\s+(?:trong danh sách|in list|trong list)\s+["']?(.+?)["']?$/i);
     if (deleteMatch) {
       action = "DELETE_CARD";
       payload = {
@@ -25,7 +27,7 @@ function parseMessageLocally(message: string) {
       responseMessage = `Tôi đang thực hiện xóa thẻ "${payload.cardTitle}" trong danh sách "${payload.listTitle}"...`;
     }
   } else if (text.includes("hoàn thành") || text.includes("mark card") || text.includes("as done") || text.includes("done card") || text.includes("xong thẻ")) {
-    const doneMatch = message.match(/(?:mark card|hoàn thành thẻ|hoàn thành card|đánh dấu thẻ|đánh dấu card|xong thẻ)\s+["']?(.+?)["']?(?:\s+as done|\s+là hoàn thành|\s+xong|$)/i);
+    const doneMatch = cleanMessage.match(/(?:mark card|hoàn thành thẻ|hoàn thành card|đánh dấu thẻ|đánh dấu card|xong thẻ)\s+["']?(.+?)["']?(?:\s+as done|\s+là hoàn thành|\s+xong|$)/i);
     if (doneMatch) {
       action = "MARK_CARD_DONE";
       payload = {
@@ -34,7 +36,7 @@ function parseMessageLocally(message: string) {
       responseMessage = `Tôi đang đánh dấu thẻ "${payload.cardTitle}" là hoàn thành bằng cách di chuyển đến danh sách "Done"...`;
     }
   } else if (text.includes("tạo thẻ") || text.includes("create card") || text.includes("thêm thẻ")) {
-    const cardMatch = message.match(/(?:tạo thẻ|create card|thêm thẻ|tạo card)\s+["']?(.+?)["']?\s+(?:trong danh sách|in list|trong list|vào danh sách|vào list)\s+["']?(.+?)["']?$/i);
+    const cardMatch = cleanMessage.match(/(?:tạo thẻ|create card|thêm thẻ|tạo card)\s+["']?(.+?)["']?\s+(?:trong danh sách|in list|trong list|vào danh sách|vào list)\s+["']?(.+?)["']?$/i);
     if (cardMatch) {
       action = "CREATE_CARD";
       payload = {
@@ -44,7 +46,7 @@ function parseMessageLocally(message: string) {
       responseMessage = `Tôi đang tạo thẻ "${payload.cardTitle}" trong danh sách "${payload.listTitle}"...`;
     }
   } else if (text.includes("tạo danh sách") || text.includes("create list") || text.includes("thêm danh sách")) {
-    const listMatch = message.match(/(?:tạo danh sách|create list|thêm danh sách|tạo list)\s+["']?(.+?)["']?$/i);
+    const listMatch = cleanMessage.match(/(?:tạo danh sách|create list|thêm danh sách|tạo list)\s+["']?(.+?)["']?$/i);
     if (listMatch) {
       action = "CREATE_LIST";
       payload = {
@@ -53,7 +55,7 @@ function parseMessageLocally(message: string) {
       responseMessage = `Tôi đang tạo danh sách mới tên là "${payload.listTitle}"...`;
     }
   } else if (text.includes("tạo bảng") || text.includes("create board") || text.includes("thêm bảng")) {
-    const boardMatch = message.match(/(?:tạo bảng|create board|thêm bảng)\s+["']?(.+?)["']?$/i);
+    const boardMatch = cleanMessage.match(/(?:tạo bảng|create board|thêm bảng)\s+["']?(.+?)["']?$/i);
     if (boardMatch) {
       action = "CREATE_BOARD";
       payload = {
@@ -180,7 +182,7 @@ export async function POST(req: Request) {
         `;
 
         const response = await fetch(
-          `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
+          `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
           {
             method: "POST",
             headers: {
@@ -208,7 +210,11 @@ export async function POST(req: Request) {
           const geminiData = await response.json();
           const jsonText = geminiData.candidates?.[0]?.content?.parts?.[0]?.text;
           if (jsonText) {
-            aiResult = JSON.parse(jsonText.trim());
+            let cleanJson = jsonText.trim();
+            if (cleanJson.startsWith("```")) {
+              cleanJson = cleanJson.replace(/^```(?:json)?\n?/, "").replace(/\n?```$/, "");
+            }
+            aiResult = JSON.parse(cleanJson.trim());
           }
         }
       } catch (err) {
