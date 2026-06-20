@@ -10,30 +10,13 @@ interface Props {
   action: ACTION;
 };
 
-// In-memory cache to store Clerk user profile details to avoid slow external API calls on every board action
-const userCache = new Map<string, { id: string; imageUrl: string; name: string }>();
-
 export const createAuditLog = async (props: Props) => {
   try {
-    const { orgId, userId } = auth();
+    const { orgId } = auth();
+    const user = await currentUser();
 
-    if (!userId || !orgId) {
+    if (!user || !orgId) {
       throw new Error("User not found!");
-    }
-
-    let cachedUser = userCache.get(userId);
-
-    if (!cachedUser) {
-      const user = await currentUser();
-      if (!user) {
-        throw new Error("User not found!");
-      }
-      cachedUser = {
-        id: user.id,
-        imageUrl: user.imageUrl,
-        name: `${user.firstName || ""} ${user.lastName || ""}`.trim(),
-      };
-      userCache.set(userId, cachedUser);
     }
 
     const { entityId, entityType, entityTitle, action } = props;
@@ -45,9 +28,9 @@ export const createAuditLog = async (props: Props) => {
         entityType,
         entityTitle,
         action,
-        userId: cachedUser.id,
-        userImage: cachedUser.imageUrl,
-        userName: cachedUser.name,
+        userId: user.id,
+        userImage: user?.imageUrl,
+        userName: user?.firstName + " " + user?.lastName,
       }
     });
   } catch (error) {

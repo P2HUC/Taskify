@@ -26,7 +26,7 @@ export const AiAssistant = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      content: "Chào bạn! Tôi là Trợ lý ảo Z-UP AI 🤖. Tôi có thể giúp bạn quản lý công việc trực tiếp trên bảng bằng các câu lệnh tự nhiên.\n\nBạn có thể thử các câu lệnh như:\n• Tạo bảng mới\n• Tạo danh sách\n• Thêm thẻ mới\n• Xóa thẻ\n\nHãy nhập câu hỏi hoặc yêu cầu của bạn ở bên dưới nhé!"
+      content: "Chào bạn! Tôi là Trợ lý ảo Z-UP AI 🤖. Tôi có thể giúp bạn quản lý công việc trực tiếp trên bảng bằng các câu lệnh tự nhiên.\n\nBạn có thể thử các câu lệnh như:\n• Tạo bảng mới: \"tạo bảng Kế hoạch thuyết trình\"\n• Tạo danh sách: \"tạo danh sách Cần làm\"\n• Thêm thẻ mới: \"tạo thẻ Viết báo cáo trong danh sách Cần làm\"\n• Hoàn thành thẻ: \"hoàn thành thẻ Viết báo cáo\"\n• Xóa thẻ: \"xóa thẻ Viết báo cáo trong danh sách Cần làm\"\n\nHãy nhập câu hỏi hoặc yêu cầu của bạn ở bên dưới nhé!"
     }
   ]);
   const [inputValue, setInputValue] = useState("");

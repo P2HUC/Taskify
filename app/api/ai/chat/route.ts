@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs";
+import { revalidatePath } from "next/cache";
 import { db } from "@/lib/db";
 import { createAuditLog } from "@/lib/create-audit-log";
 import { ACTION, ENTITY_TYPE } from "@prisma/client";
@@ -9,15 +10,13 @@ import { defaultImages } from "@/constants/images";
 
 // Helper for regex-based fallback parser (English & Vietnamese)
 function parseMessageLocally(message: string) {
-  // Strip trailing punctuation like periods/question marks and whitespace to prevent regex matching failures
-  const cleanMessage = message.replace(/[.?!\s]+$/, "").trim();
-  const text = cleanMessage.toLowerCase();
+  const text = message.toLowerCase().trim();
   let action: string | null = null;
   let payload: any = {};
   let responseMessage = "";
 
   if (text.includes("xóa thẻ") || text.includes("delete card") || text.includes("xóa card")) {
-    const deleteMatch = cleanMessage.match(/(?:xóa thẻ|delete card|xóa card)\s+["']?(.+?)["']?\s+(?:trong danh sách|in list|trong list)\s+["']?(.+?)["']?$/i);
+    const deleteMatch = message.match(/(?:xóa thẻ|delete card|xóa card)\s+["']?(.+?)["']?\s+(?:trong danh sách|in list|trong list)\s+["']?(.+?)["']?$/i);
     if (deleteMatch) {
       action = "DELETE_CARD";
       payload = {
@@ -27,7 +26,7 @@ function parseMessageLocally(message: string) {
       responseMessage = `Tôi đang thực hiện xóa thẻ "${payload.cardTitle}" trong danh sách "${payload.listTitle}"...`;
     }
   } else if (text.includes("hoàn thành") || text.includes("mark card") || text.includes("as done") || text.includes("done card") || text.includes("xong thẻ")) {
-    const doneMatch = cleanMessage.match(/(?:mark card|hoàn thành thẻ|hoàn thành card|đánh dấu thẻ|đánh dấu card|xong thẻ)\s+["']?(.+?)["']?(?:\s+as done|\s+là hoàn thành|\s+xong|$)/i);
+    const doneMatch = message.match(/(?:mark card|hoàn thành thẻ|hoàn thành card|đánh dấu thẻ|đánh dấu card|xong thẻ)\s+["']?(.+?)["']?(?:\s+as done|\s+là hoàn thành|\s+xong|$)/i);
     if (doneMatch) {
       action = "MARK_CARD_DONE";
       payload = {
@@ -36,7 +35,7 @@ function parseMessageLocally(message: string) {
       responseMessage = `Tôi đang đánh dấu thẻ "${payload.cardTitle}" là hoàn thành bằng cách di chuyển đến danh sách "Done"...`;
     }
   } else if (text.includes("tạo thẻ") || text.includes("create card") || text.includes("thêm thẻ")) {
-    const cardMatch = cleanMessage.match(/(?:tạo thẻ|create card|thêm thẻ|tạo card)\s+["']?(.+?)["']?\s+(?:trong danh sách|in list|trong list|vào danh sách|vào list)\s+["']?(.+?)["']?$/i);
+    const cardMatch = message.match(/(?:tạo thẻ|create card|thêm thẻ|tạo card)\s+["']?(.+?)["']?\s+(?:trong danh sách|in list|trong list|vào danh sách|vào list)\s+["']?(.+?)["']?$/i);
     if (cardMatch) {
       action = "CREATE_CARD";
       payload = {
@@ -46,7 +45,7 @@ function parseMessageLocally(message: string) {
       responseMessage = `Tôi đang tạo thẻ "${payload.cardTitle}" trong danh sách "${payload.listTitle}"...`;
     }
   } else if (text.includes("tạo danh sách") || text.includes("create list") || text.includes("thêm danh sách")) {
-    const listMatch = cleanMessage.match(/(?:tạo danh sách|create list|thêm danh sách|tạo list)\s+["']?(.+?)["']?$/i);
+    const listMatch = message.match(/(?:tạo danh sách|create list|thêm danh sách|tạo list)\s+["']?(.+?)["']?$/i);
     if (listMatch) {
       action = "CREATE_LIST";
       payload = {
@@ -55,7 +54,7 @@ function parseMessageLocally(message: string) {
       responseMessage = `Tôi đang tạo danh sách mới tên là "${payload.listTitle}"...`;
     }
   } else if (text.includes("tạo bảng") || text.includes("create board") || text.includes("thêm bảng")) {
-    const boardMatch = cleanMessage.match(/(?:tạo bảng|create board|thêm bảng)\s+["']?(.+?)["']?$/i);
+    const boardMatch = message.match(/(?:tạo bảng|create board|thêm bảng)\s+["']?(.+?)["']?$/i);
     if (boardMatch) {
       action = "CREATE_BOARD";
       payload = {
@@ -122,7 +121,7 @@ export async function POST(req: Request) {
       boardContext = "No active board is currently open.";
     }
 
-    let aiResult = { action: null, payload: {} as any, message: "" };
+    let aiResult: any = { action: null, payload: {}, message: "" };
 
     const apiKey = process.env.GEMINI_API_KEY;
 
@@ -136,7 +135,7 @@ export async function POST(req: Request) {
 
         const systemInstruction = `
           You are Trợ lý ảo Z-UP AI 🤖. You act as a customer service representative and board manager for Z-UP (a Trello clone).
-          Your task is to analyze the user's message and determine if they want to perform an action on their board, or if they have a general question.
+          Your task is to analyze the user's message and determine if they want to perform one or more actions on their board, or if they have a general question.
 
           You have access to the current board's context. Use this board data to:
           - Answer questions about what lists and cards exist.
@@ -145,44 +144,46 @@ export async function POST(req: Request) {
 
           You support the following actions:
           1. "DELETE_CARD": User wants to delete a card. Requires 'cardTitle' and 'listTitle' parameters.
-             Example: "delete card Task A in list Todo" -> action="DELETE_CARD", payload={cardTitle: "Task A", listTitle: "Todo"}
           2. "MARK_CARD_DONE": User wants to mark a card as done/completed. Requires 'cardTitle' parameter.
-             Example: "mark card Task B as done" -> action="MARK_CARD_DONE", payload={cardTitle: "Task B"}
           3. "CREATE_CARD": User wants to add/create a card. Requires 'cardTitle' and 'listTitle' parameters.
-             Example: "create card Write docs in list Backlog" -> action="CREATE_CARD", payload={cardTitle: "Write docs", listTitle: "Backlog"}
           4. "CREATE_LIST": User wants to add/create a list. Requires 'listTitle' parameter.
-             Example: "create list In Progress" -> action="CREATE_LIST", payload={listTitle: "In Progress"}
           5. "CREATE_BOARD": User wants to create/initialize a new board. Requires 'boardTitle' parameter.
-             Example: "tạo bảng kế hoạch chuẩn bị thuyết trình" -> action="CREATE_BOARD", payload={boardTitle: "Kế hoạch thuyết trình"}
+
+          CRITICAL - Executing Multiple Actions & Confirmation Responses:
+          - You can return multiple actions in a single response. For example, if you suggest creating lists 'Môn học', 'Tài liệu', 'Lịch ôn tập', and 'Hoàn thành' and the user says "có" (yes) or "đồng ý" (agree), you should return a list containing 4 "CREATE_LIST" actions in the "actions" array.
+          - Ensure list titles match the case of the user's intent or standard board lists.
 
           CRITICAL - Multi-turn Parameter Gathering & Action Resolution:
           - Pay close attention to the conversation history. If in a previous turn you (the assistant/model) asked the user for a missing parameter (for example, you asked "Bạn muốn thêm nhiệm vụ 'lấy key api' vào danh sách nào ạ?"), and the user's latest message provides that parameter (for example, "to do" or "vào danh sách to do"), you MUST recognize that they are completing the previous action request.
-          - In this case, do NOT ask another question or treat the parameter as a standalone query. Instead, merge the current message with the previous context, resolve the target action (e.g. action="CREATE_CARD", payload={ "cardTitle": "lấy key api", "listTitle": "TO DO" }), and return a message stating you are executing the action (e.g. "Tôi đã hiểu, tôi sẽ tạo thẻ 'lấy key api' vào danh sách 'TO DO' cho bạn.").
-          - Ensure list titles match the case of the user's intent or standard board lists (e.g., if the user says "to do" and you have a list named "TO DO", map it to "TO DO").
+          - In this case, do NOT ask another question or treat the parameter as a standalone query. Instead, merge the current message with the previous context, resolve the target action, and return a message stating you are executing the action.
 
-          If the user wants a new board but has not given a clear or specific title, or if you need to ask more questions to clarify their requirements/ideas before building the board, DO NOT return action="CREATE_BOARD" yet. Instead:
-          - Set action=null, payload={}.
+          If the user wants a new board but has not given a clear or specific title, or if you need to ask more questions to clarify their requirements/ideas before building the board, DO NOT return actions yet. Instead:
+          - Set actions=null.
           - Ask clarifying questions politely (e.g. "Bạn muốn đặt tên bảng là gì? Bạn cần bao nhiêu danh sách?", etc.).
           - Suggest potential lists and cards they might want to include.
           
-          If they have provided a specific idea or a title, you should create the board directly (e.g., action="CREATE_BOARD", payload={boardTitle: "Kế hoạch thuyết trình"}).
+          If they have provided a specific idea or a title, you should create the board directly (e.g. return action "CREATE_BOARD").
           
-          For general questions, suggestions, or analysis of the board, set action to null and answer/suggest politely in the same language they asked in (default is Vietnamese).
+          For general questions, suggestions, or analysis of the board, set actions to null and answer/suggest politely in the same language they asked in (default is Vietnamese).
 
           Your response must be JSON matching the following schema:
           {
-            "action": "DELETE_CARD" | "MARK_CARD_DONE" | "CREATE_CARD" | "CREATE_LIST" | "CREATE_BOARD" | null,
-            "payload": {
-              "cardTitle": string | null,
-              "listTitle": string | null,
-              "boardTitle": string | null
-            },
+            "actions": [
+              {
+                "action": "DELETE_CARD" | "MARK_CARD_DONE" | "CREATE_CARD" | "CREATE_LIST" | "CREATE_BOARD",
+                "payload": {
+                  "cardTitle": string | null,
+                  "listTitle": string | null,
+                  "boardTitle": string | null
+                }
+              }
+            ] | null,
             "message": string // Customer service response message explaining what you did, giving suggestions, or asking clarifying questions.
           }
         `;
 
         const response = await fetch(
-          `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
+          `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
           {
             method: "POST",
             headers: {
@@ -210,11 +211,12 @@ export async function POST(req: Request) {
           const geminiData = await response.json();
           const jsonText = geminiData.candidates?.[0]?.content?.parts?.[0]?.text;
           if (jsonText) {
-            let cleanJson = jsonText.trim();
-            if (cleanJson.startsWith("```")) {
-              cleanJson = cleanJson.replace(/^```(?:json)?\n?/, "").replace(/\n?```$/, "");
+            let cleanedJson = jsonText.trim();
+            if (cleanedJson.startsWith("```")) {
+              cleanedJson = cleanedJson.replace(/^```(?:json)?\n?/i, "");
+              cleanedJson = cleanedJson.replace(/\n?```$/, "");
             }
-            aiResult = JSON.parse(cleanJson.trim());
+            aiResult = JSON.parse(cleanedJson.trim());
           }
         }
       } catch (err) {
@@ -222,14 +224,24 @@ export async function POST(req: Request) {
       }
     }
 
-    if (!aiResult.message) {
-      aiResult = parseMessageLocally(message) as any;
+    if (!aiResult.message && !aiResult.actions) {
+      const local = parseMessageLocally(message) as any;
+      aiResult.action = local.action;
+      aiResult.payload = local.payload;
+      aiResult.message = local.message;
     }
 
     let actionExecuted = false;
     let newBoardId: string | null = null;
+    let actionsToExecute: Array<{ action: string; payload: any }> = [];
 
-    if (aiResult.action) {
+    if (aiResult.actions && Array.isArray(aiResult.actions)) {
+      actionsToExecute = aiResult.actions;
+    } else if (aiResult.action) {
+      actionsToExecute = [{ action: aiResult.action, payload: aiResult.payload || {} }];
+    }
+
+    if (actionsToExecute.length > 0) {
       if (!userId || !orgId) {
         return NextResponse.json({
           message: "Bạn cần đăng nhập để thực hiện các hành động này.",
@@ -237,13 +249,15 @@ export async function POST(req: Request) {
         });
       }
 
-      const action = aiResult.action;
-      const payload = aiResult.payload;
+      for (const item of actionsToExecute) {
+        const action = item.action;
+        const payload = item.payload || {};
 
-      if (action !== "CREATE_BOARD" && !boardId) {
-        aiResult.message = "Vui lòng mở một bảng công việc (Board) cụ thể để thực hiện các câu lệnh điều chỉnh thẻ và danh sách.";
-        aiResult.action = null;
-      } else {
+        if (action !== "CREATE_BOARD" && !boardId) {
+          aiResult.message = "Vui lòng mở một bảng công việc (Board) cụ thể để thực hiện các câu lệnh điều chỉnh thẻ và danh sách.";
+          break;
+        }
+
         try {
           if (action === "CREATE_BOARD" && payload.boardTitle) {
             const canCreate = await hasAvailableCount();
@@ -251,7 +265,7 @@ export async function POST(req: Request) {
 
             if (!canCreate && !isPro) {
               aiResult.message = "Bạn đã đạt tới giới hạn số bảng miễn phí. Vui lòng nâng cấp để tạo thêm.";
-              aiResult.action = null;
+              break;
             } else {
               const randomImage = defaultImages[Math.floor(Math.random() * defaultImages.length)];
               const board = await db.board.create({
@@ -292,14 +306,18 @@ export async function POST(req: Request) {
               });
               if (card) {
                 await db.card.delete({ where: { id: card.id } });
+                await createAuditLog({
+                  entityId: card.id,
+                  entityTitle: card.title,
+                  entityType: ENTITY_TYPE.CARD,
+                  action: ACTION.DELETE,
+                });
                 actionExecuted = true;
               } else {
                 aiResult.message = `Không tìm thấy thẻ "${payload.cardTitle}" trong danh sách "${payload.listTitle}".`;
-                aiResult.action = null;
               }
             } else {
               aiResult.message = `Không tìm thấy danh sách "${payload.listTitle}" trên bảng công việc này.`;
-              aiResult.action = null;
             }
           }
 
@@ -337,10 +355,15 @@ export async function POST(req: Request) {
                 where: { id: card.id },
                 data: { listId: doneList.id, order: nextCardOrder }
               });
+              await createAuditLog({
+                entityId: card.id,
+                entityTitle: card.title,
+                entityType: ENTITY_TYPE.CARD,
+                action: ACTION.UPDATE,
+              });
               actionExecuted = true;
             } else {
               aiResult.message = `Không tìm thấy thẻ "${payload.cardTitle}" trên bảng công việc này.`;
-              aiResult.action = null;
             }
           }
 
@@ -366,8 +389,14 @@ export async function POST(req: Request) {
             });
             const nextOrder = lastCard ? lastCard.order + 1 : 1;
 
-            await db.card.create({
+            const newCard = await db.card.create({
               data: { title: payload.cardTitle, listId: list.id, order: nextOrder }
+            });
+            await createAuditLog({
+              entityId: newCard.id,
+              entityTitle: newCard.title,
+              entityType: ENTITY_TYPE.CARD,
+              action: ACTION.CREATE,
             });
             actionExecuted = true;
           }
@@ -384,13 +413,18 @@ export async function POST(req: Request) {
               });
               const nextOrder = lastList ? lastList.order + 1 : 1;
 
-              await db.list.create({
+              const newList = await db.list.create({
                 data: { title: payload.listTitle, boardId, order: nextOrder }
+              });
+              await createAuditLog({
+                entityId: newList.id,
+                entityTitle: newList.title,
+                entityType: ENTITY_TYPE.LIST,
+                action: ACTION.CREATE,
               });
               actionExecuted = true;
             } else {
               aiResult.message = `Danh sách "${payload.listTitle}" đã tồn tại trên bảng công việc này.`;
-              aiResult.action = null;
             }
           }
         } catch (dbErr) {
@@ -398,6 +432,15 @@ export async function POST(req: Request) {
           aiResult.message = "Đã xảy ra lỗi hệ thống khi cập nhật bảng công việc. Vui lòng thử lại.";
           aiResult.action = null;
         }
+      }
+    }
+
+    if (actionExecuted) {
+      if (boardId) {
+        revalidatePath(`/board/${boardId}`);
+      }
+      if (newBoardId) {
+        revalidatePath(`/organization/${orgId}`);
       }
     }
 

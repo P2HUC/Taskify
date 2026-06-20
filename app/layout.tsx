@@ -7,7 +7,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import { siteConfig } from '@/config/site'
 
-const inter = Inter({ subsets: ['latin', 'vietnamese'], display: 'swap' })
+const inter = Inter({ subsets: ['latin', 'vietnamese'] })
 
 export const metadata: Metadata = {
   title: {

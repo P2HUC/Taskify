@@ -19,8 +19,7 @@ import { GuestLoginButton } from "@/components/guest-login-button";
 import { poppins } from "@/lib/fonts";
 
 const headingFont = localFont({
-  src: "../../public/fonts/font.woff2",
-  display: "swap",
+  src: "../../public/fonts/font.woff2"
 });
 
 const textFont = poppins;

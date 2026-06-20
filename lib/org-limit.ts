@@ -1,5 +1,4 @@
 import { auth } from "@clerk/nextjs";
-import { cache } from "react";
 
 import { db } from "@/lib/db";
 import { MAX_FREE_BOARDS } from "@/constants/boards";
@@ -50,7 +49,7 @@ export const decreaseAvailableCount = async () => {
   }
 };
 
-export const hasAvailableCount = cache(async () => {
+export const hasAvailableCount = async () => {
   const { orgId } = auth();
 
   if (!orgId) {
@@ -66,9 +65,9 @@ export const hasAvailableCount = cache(async () => {
   } else {
     return false;
   }
-});
+};
 
-export const getAvailableCount = cache(async () => {
+export const getAvailableCount = async () => {
   const { orgId } = auth();
 
   if (!orgId) {
@@ -84,4 +83,4 @@ export const getAvailableCount = cache(async () => {
   }
 
   return orgLimit.count;
-});
+};
