@@ -1,21 +1,22 @@
 import Link from "next/link";
 import localFont from "next/font/local";
 import { Poppins } from "next/font/google";
-import { 
-  Medal, 
-  Kanban, 
-  Activity, 
-  ShieldCheck, 
-  CreditCard, 
-  ListTodo, 
-  Zap, 
-  ArrowRight, 
+import {
+  Medal,
+  Kanban,
+  Activity,
+  ShieldCheck,
+  CreditCard,
+  ListTodo,
+  Zap,
+  ArrowRight,
   Sparkles,
   CheckCircle2
 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { GuestLoginButton } from "@/components/guest-login-button";
 
 const headingFont = localFont({
   src: "../../public/fonts/font.woff2"
@@ -69,6 +70,7 @@ const MarketingPage = () => {
               <ArrowRight className="h-4 w-4" />
             </Link>
           </Button>
+          <GuestLoginButton size="lg" variant="outline" className="border-fuchsia-600 text-fuchsia-600 hover:bg-fuchsia-50/50 hover:text-fuchsia-700 transition" />
           <Button size="lg" variant="outline" asChild>
             <Link href="#features">
               Explore features
@@ -259,7 +261,7 @@ const MarketingPage = () => {
             </div>
             <div className="mt-6 flex items-center justify-between gap-x-4">
               <div className="flex items-baseline gap-x-1">
-                <span className="text-3xl font-extrabold">$5</span>
+                <span className="text-3xl font-extrabold">$2</span>
                 <span className="text-xs text-slate-400">/ month</span>
               </div>
               <Button variant="outline" className="bg-white text-slate-900 border-none hover:bg-slate-100" asChild>
