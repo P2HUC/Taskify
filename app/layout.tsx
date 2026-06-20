@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { ClerkProvider } from "@clerk/nextjs"
 import { Toaster } from "sonner";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import { siteConfig } from '@/config/site'
 
@@ -33,6 +34,7 @@ export default function RootLayout({
         <body className={inter.className}>
           <Toaster />
           {children}
+          <SpeedInsights />
         </body>
       </html>
     </ClerkProvider>
