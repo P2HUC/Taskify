@@ -1,24 +1,11 @@
 import Link from "next/link";
-import { Poppins } from "next/font/google";
 import { ArrowLeft, Shield } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { poppins } from "@/lib/fonts";
 
-const textFont = Poppins({
-  subsets: ["latin", "latin-ext"],
-  weight: [
-    "100",
-    "200",
-    "300",
-    "400",
-    "500",
-    "600",
-    "700",
-    "800",
-    "900"
-  ],
-});
+const textFont = poppins;
 
 const PrivacyPage = () => {
   return (

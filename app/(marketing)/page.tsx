@@ -1,6 +1,5 @@
 import Link from "next/link";
 import localFont from "next/font/local";
-import { Poppins } from "next/font/google";
 import {
   Medal,
   Kanban,
@@ -17,25 +16,13 @@ import {
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { GuestLoginButton } from "@/components/guest-login-button";
+import { poppins } from "@/lib/fonts";
 
 const headingFont = localFont({
   src: "../../public/fonts/font.woff2"
 });
 
-const textFont = Poppins({
-  subsets: ["latin", "latin-ext"],
-  weight: [
-    "100",
-    "200",
-    "300",
-    "400",
-    "500",
-    "600",
-    "700",
-    "800",
-    "900"
-  ],
-});
+const textFont = poppins;
 
 const MarketingPage = () => {
   return (
