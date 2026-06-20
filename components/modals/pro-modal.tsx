@@ -41,10 +41,10 @@ export const ProModal = () => {
         </div>
         <div className="text-neutral-700 mx-auto space-y-6 p-6">
           <h2 className="font-semibold text-xl">
-            Nâng cấp lên Z-up Pro ngay hôm nay!
+            Nâng cấp lên Z-UP Pro ngay hôm nay!
           </h2>
           <p className="text-xs font-semibold text-neutral-600">
-            Khám phá những điều tuyệt vời nhất của Z-up
+            Khám phá những điều tuyệt vời nhất của Z-UP
           </p>
           <div className="pl-3">
             <ul className="text-sm list-disc">

@@ -39,7 +39,7 @@ const PrivacyPage = () => {
 
         <div className="prose prose-neutral max-w-none space-y-6 text-sm md:text-base leading-relaxed text-neutral-600">
           <p>
-            Tại Z-up, có thể truy cập được từ z-up.com (và tất cả các ứng dụng liên kết), một trong những ưu tiên hàng đầu của chúng tôi là quyền riêng tư của khách truy cập. Tài liệu Chính sách Bảo mật này chứa các loại thông tin được Z-up thu thập, ghi lại và cách chúng tôi sử dụng thông tin đó.
+            Tại Z-UP, có thể truy cập được từ z-up.com (và tất cả các ứng dụng liên kết), một trong những ưu tiên hàng đầu của chúng tôi là quyền riêng tư của khách truy cập. Tài liệu Chính sách Bảo mật này chứa các loại thông tin được Z-UP thu thập, ghi lại và cách chúng tôi sử dụng thông tin đó.
           </p>
 
           <h2 className="text-lg md:text-xl font-semibold text-neutral-900 pt-4 border-t">
@@ -58,7 +58,7 @@ const PrivacyPage = () => {
             2. Cách Chúng tôi Sử dụng Dữ liệu của Bạn
           </h2>
           <p>
-            Z-up sử dụng dữ liệu được thu thập cho các mục đích khác nhau:
+            Z-UP sử dụng dữ liệu được thu thập cho các mục đích khác nhau:
           </p>
           <ul className="list-disc pl-5 space-y-2">
             <li>Để cung cấp và duy trì Dịch vụ của chúng tôi.</li>

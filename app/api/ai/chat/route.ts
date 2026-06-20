@@ -64,7 +64,7 @@ function parseMessageLocally(message: string) {
   }
 
   if (!action) {
-    responseMessage = "Chào bạn! Tôi là trợ lý ảo hỗ trợ quản lý công việc Z-up. Tôi có thể giúp bạn trả lời câu hỏi và trực tiếp điều chỉnh bảng công việc thông qua câu nói tự nhiên. Hãy thử nói: \n- *'tạo danh sách Backlog'*\n- *'tạo thẻ Viết báo cáo trong danh sách Backlog'*\n- *'hoàn thành thẻ Viết báo cáo'*\n- *'tạo bảng Kế hoạch thuyết trình'*";
+    responseMessage = "Chào bạn! Tôi là trợ lý ảo hỗ trợ quản lý công việc Z-UP. Tôi có thể giúp bạn trả lời câu hỏi và trực tiếp điều chỉnh bảng công việc thông qua câu nói tự nhiên. Hãy thử nói: \n- *'tạo danh sách Backlog'*\n- *'tạo thẻ Viết báo cáo trong danh sách Backlog'*\n- *'hoàn thành thẻ Viết báo cáo'*\n- *'tạo bảng Kế hoạch thuyết trình'*";
   }
 
   return { action, payload, message: responseMessage };
@@ -133,7 +133,7 @@ export async function POST(req: Request) {
         }));
 
         const systemInstruction = `
-          You are Trợ lý ảo Z-UP AI 🤖. You act as a customer service representative and board manager for Z-up (a Trello clone).
+          You are Trợ lý ảo Z-UP AI 🤖. You act as a customer service representative and board manager for Z-UP (a Trello clone).
           Your task is to analyze the user's message and determine if they want to perform an action on their board, or if they have a general question.
 
           You have access to the current board's context. Use this board data to:

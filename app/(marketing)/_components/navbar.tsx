@@ -6,7 +6,7 @@ import { GuestLoginButton } from "@/components/guest-login-button";
 
 export const Navbar = () => {
   return (
-    <div className="fixed top-0 w-full h-14 px-4 border-b shadow-sm bg-white flex items-center">
+    <div className="fixed top-0 w-full h-14 px-4 border-b shadow-sm bg-white/70 backdrop-blur-md flex items-center z-50">
       <div className="md:max-w-screen-2xl mx-auto flex items-center w-full justify-between">
         <Logo />
         <div className="flex items-center justify-between w-full md:w-auto md:justify-end gap-x-2">
@@ -18,7 +18,7 @@ export const Navbar = () => {
           <GuestLoginButton size="sm" variant="outline" className="hidden md:inline-flex" />
           <Button size="sm" asChild>
             <Link href="/sign-up">
-              Sử dụng Z-up miễn phí
+              Sử dụng Z-UP miễn phí
             </Link>
           </Button>
         </div>

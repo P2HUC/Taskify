@@ -4,6 +4,7 @@ import { ElementRef, useRef } from "react";
 import { toast } from "sonner";
 import { X } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useMediaQuery } from "usehooks-ts";
 
 import {
   Popover,
@@ -33,6 +34,7 @@ export const FormPopover = ({
   align,
   sideOffset = 0,
 }: FormPopoverProps) => {
+  const isMobile = useMediaQuery("(max-width: 768px)");
   const proModal = useProModal();
   const router = useRouter();
   const closeRef = useRef<ElementRef<"button">>(null);
@@ -62,9 +64,9 @@ export const FormPopover = ({
         {children}
       </PopoverTrigger>
       <PopoverContent
-        align={align}
-        className="w-80 pt-3"
-        side={side}
+        align={isMobile ? "center" : align}
+        className="w-80 max-w-[calc(100vw-20px)] pt-3"
+        side={isMobile ? "bottom" : side}
         sideOffset={sideOffset}
       >
         <div className="text-sm font-medium text-center text-neutral-600 pb-4">

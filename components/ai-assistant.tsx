@@ -7,12 +7,7 @@ import {
   X, 
   Send, 
   Loader2, 
-  MessageSquare, 
   Sparkles,
-  HelpCircle,
-  PlusCircle,
-  CheckCircle2,
-  Trash2
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -31,7 +26,7 @@ export const AiAssistant = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      content: "Chào bạn! Tôi là Trợ lý ảo Z-UP AI 🤖. Tôi có thể giúp bạn giải đáp các câu hỏi về hệ thống và trực tiếp tương tác, sắp xếp, cập nhật bảng tiến độ công việc theo yêu cầu của bạn."
+      content: "Chào bạn! Tôi là Trợ lý ảo Z-UP AI 🤖. Tôi có thể giúp bạn quản lý công việc trực tiếp trên bảng bằng các câu lệnh tự nhiên.\n\nBạn có thể thử các câu lệnh như:\n• Tạo bảng mới\n• Tạo danh sách\n• Thêm thẻ mới\n• Xóa thẻ\n\nHãy nhập câu hỏi hoặc yêu cầu của bạn ở bên dưới nhé!"
     }
   ]);
   const [inputValue, setInputValue] = useState("");
@@ -110,9 +105,6 @@ export const AiAssistant = () => {
     }
   };
 
-  const handleQuickPrompt = (prompt: string) => {
-    handleSend(prompt);
-  };
 
   return (
     <div className="fixed bottom-6 right-6 z-[9999] font-sans">
@@ -125,7 +117,7 @@ export const AiAssistant = () => {
           <Bot className="h-6 w-6 group-hover:rotate-12 transition-transform duration-300" />
           {/* Tooltip */}
           <div className="absolute right-16 top-1/2 -translate-y-1/2 px-3 py-1.5 rounded-lg bg-neutral-900 text-white text-xs font-semibold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow shadow-neutral-900/50 pointer-events-none">
-            Trợ lý Z-up AI
+            Trợ lý Z-UP AI
           </div>
         </button>
       )}
@@ -142,7 +134,7 @@ export const AiAssistant = () => {
               </div>
               <div>
                 <h3 className="font-bold text-sm tracking-wide flex items-center gap-x-1.5">
-                  Z-up AI Assistant
+                  Z-UP AI Assistant
                   <Sparkles className="h-3.5 w-3.5 text-amber-300 fill-amber-300" />
                 </h3>
                 <p className="text-[10px] text-white/80">Trực tuyến • Hỗ trợ bảng công việc</p>
@@ -197,39 +189,6 @@ export const AiAssistant = () => {
             <div ref={chatEndRef} />
           </div>
 
-          {/* Quick Actions (only shown if board is active) */}
-          {boardId && (
-            <div className="px-3 py-2 bg-slate-50 border-t border-slate-100 flex flex-wrap gap-1.5 max-h-24 overflow-y-auto">
-              <button
-                onClick={() => handleQuickPrompt("Tạo danh sách 'Cần Làm'")}
-                className="flex items-center gap-x-1 text-[11px] font-medium bg-white text-slate-700 border border-slate-200 rounded-full px-2.5 py-1 hover:bg-slate-100 hover:border-slate-300 transition"
-              >
-                <PlusCircle className="h-3 w-3 text-indigo-500" />
-                + Tạo list Cần Làm
-              </button>
-              <button
-                onClick={() => handleQuickPrompt("Tạo thẻ 'Nhiệm vụ 1' trong danh sách 'Cần Làm'")}
-                className="flex items-center gap-x-1 text-[11px] font-medium bg-white text-slate-700 border border-slate-200 rounded-full px-2.5 py-1 hover:bg-slate-100 hover:border-slate-300 transition"
-              >
-                <Sparkles className="h-3 w-3 text-amber-500" />
-                + Tạo card trong list
-              </button>
-              <button
-                onClick={() => handleQuickPrompt("Hoàn thành thẻ 'Nhiệm vụ 1'")}
-                className="flex items-center gap-x-1 text-[11px] font-medium bg-white text-slate-700 border border-slate-200 rounded-full px-2.5 py-1 hover:bg-slate-100 hover:border-slate-300 transition"
-              >
-                <CheckCircle2 className="h-3 w-3 text-emerald-500" />
-                ✓ Hoàn thành card
-              </button>
-              <button
-                onClick={() => handleQuickPrompt("Xóa thẻ 'Nhiệm vụ 1' trong danh sách 'Done'")}
-                className="flex items-center gap-x-1 text-[11px] font-medium bg-white text-slate-700 border border-slate-200 rounded-full px-2.5 py-1 hover:bg-slate-100 hover:border-slate-300 transition"
-              >
-                <Trash2 className="h-3 w-3 text-rose-500" />
-                ✗ Xóa card
-              </button>
-            </div>
-          )}
 
           {/* Input Form */}
           <form
@@ -250,7 +209,7 @@ export const AiAssistant = () => {
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder={boardId ? "Nhập câu lệnh của bạn..." : "Hỏi trợ lý ảo Z-up..."}
+              placeholder={boardId ? "Nhập câu lệnh của bạn..." : "Hỏi trợ lý ảo Z-UP..."}
               disabled={isLoading}
               style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
               className="flex-1 text-sm outline-none border border-slate-200 rounded-xl px-3 py-2 bg-slate-50 focus:bg-white focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition resize-none overflow-y-auto max-h-24 min-h-[38px] leading-relaxed no-scrollbar"

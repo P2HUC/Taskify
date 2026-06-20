@@ -19,7 +19,8 @@ import { GuestLoginButton } from "@/components/guest-login-button";
 import { poppins } from "@/lib/fonts";
 
 const headingFont = localFont({
-  src: "../../public/fonts/font.woff2"
+  src: "../../public/fonts/font.woff2",
+  display: "swap",
 });
 
 const textFont = poppins;
@@ -35,10 +36,10 @@ const MarketingPage = () => {
         )}>
           <div className="mb-4 flex items-center border shadow-sm p-4 bg-amber-100 text-amber-700 rounded-full uppercase text-xs md:text-sm font-semibold tracking-wider">
             <Medal className="h-5 w-5 mr-2" />
-            Lựa chọn tối ưu cho quản lý công việc
+            Z-UP (Giúp) bạn gánh vác mọi task.
           </div>
           <h1 className="text-4xl md:text-6xl text-center text-neutral-800 mb-6 font-bold leading-tight">
-            Z-up giúp các nhóm thúc đẩy
+            Z-UP giúp các nhóm thúc đẩy
           </h1>
           <div className="text-4xl md:text-6xl bg-gradient-to-r from-blue-600 to-orange-400 text-white px-6 p-3 rounded-xl pb-4 w-fit shadow-md">
             công việc hiệu quả.
@@ -55,7 +56,7 @@ const MarketingPage = () => {
         <div className="mt-8 flex flex-col sm:flex-row items-center gap-4">
           <Button size="lg" asChild>
             <Link href="/sign-up" className="flex items-center gap-x-2">
-              Sử dụng Z-up miễn phí
+              Sử dụng Z-UP miễn phí
               <ArrowRight className="h-4 w-4" />
             </Link>
           </Button>
@@ -136,7 +137,7 @@ const MarketingPage = () => {
             Mọi thứ bạn cần để quản lý dự án
           </h2>
           <p className="text-neutral-500 text-sm md:text-base">
-            Z-up đưa tất cả các công việc, đồng đội và tệp tin của bạn về một nơi. Giữ mọi thứ trong một không gian làm việc sạch sẽ, nhanh như chớp.
+            Z-UP đưa tất cả các công việc, đồng đội và tệp tin của bạn về một nơi. Giữ mọi thứ trong một không gian làm việc sạch sẽ, nhanh như chớp.
           </p>
         </div>
 
@@ -214,10 +215,10 @@ const MarketingPage = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center bg-white border rounded-3xl p-8 md:p-12 shadow-sm">
           <div>
             <h3 className="text-2xl md:text-3xl font-bold text-neutral-800 mb-4">
-              Gói miễn phí so với Z-up Pro
+              Gói miễn phí so với Z-UP Pro
             </h3>
             <p className="text-neutral-500 text-sm md:text-base leading-relaxed mb-6">
-              Tạo tối đa 5 bảng miễn phí, hoặc gạt bỏ mọi giới hạn bằng cách nâng cấp lên Z-up Pro. Gói đăng ký được thanh toán bảo mật qua Stripe và có thể hủy bất kỳ lúc nào.
+              Tạo tối đa 5 bảng miễn phí, hoặc gạt bỏ mọi giới hạn bằng cách nâng cấp lên Z-UP Pro. Gói đăng ký được thanh toán bảo mật qua Stripe và có thể hủy bất kỳ lúc nào.
             </p>
             <div className="space-y-3.5">
               <div className="flex items-center gap-x-2.5 text-slate-700">
@@ -239,7 +240,7 @@ const MarketingPage = () => {
               <span className="text-xs bg-white/20 text-white px-2.5 py-1 rounded-full font-bold uppercase tracking-wider w-fit">
                 Không giới hạn bảng
               </span>
-              <h4 className="text-2xl font-bold mt-4 mb-2">Z-up Pro</h4>
+              <h4 className="text-2xl font-bold mt-4 mb-2">Z-UP Pro</h4>
               <p className="text-slate-300 text-xs md:text-sm">
                 Dành cho người dùng chuyên sâu cần mở rộng tổ chức nâng cao và không giới hạn bảng.
               </p>
@@ -271,14 +272,14 @@ const MarketingPage = () => {
           </div>
 
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4 max-w-xl leading-tight">
-            Bắt đầu sắp xếp công việc của bạn với Z-up ngay hôm nay
+            Bắt đầu sắp xếp công việc của bạn với Z-UP ngay hôm nay
           </h2>
           <p className="text-white/80 text-sm md:text-base max-w-lg mb-8 leading-relaxed">
-            Tham gia cùng hàng ngàn nhóm đang sử dụng Z-up để cộng tác, trực quan hóa khối lượng công việc và tăng tốc độ bàn giao dự án.
+            Tham gia cùng hàng ngàn nhóm đang sử dụng Z-UP để cộng tác, trực quan hóa khối lượng công việc và tăng tốc độ bàn giao dự án.
           </p>
           <Button size="lg" className="bg-white text-fuchsia-700 hover:bg-slate-100 border-none shadow-md font-semibold" asChild>
             <Link href="/sign-up">
-              Sử dụng Z-up miễn phí
+              Sử dụng Z-UP miễn phí
             </Link>
           </Button>
         </div>

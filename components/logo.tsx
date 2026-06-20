@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 
 const headingFont = localFont({
   src: "../public/fonts/font.woff2",
+  display: "swap",
 });
 
 export const Logo = () => {
@@ -17,12 +18,13 @@ export const Logo = () => {
           alt="Logo"
           height={46}
           width={46}
+          priority
         />
         <p className={cn(
           "text-2xl text-neutral-700",
           headingFont.className,
         )}>
-          Z-up
+          Z-UP
         </p>
       </div>
     </Link>

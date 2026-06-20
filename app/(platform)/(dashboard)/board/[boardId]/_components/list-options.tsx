@@ -70,7 +70,7 @@ export const ListOptions = ({
           <MoreHorizontal className="h-4 w-4" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="px-0 pt-3 pb-3" side="bottom" align="start">
+      <PopoverContent className="w-72 max-w-[calc(100vw-20px)] px-0 pt-3 pb-3" side="bottom" align="start">
         <div className="text-sm font-medium text-center text-neutral-600 pb-4">
           Thao tác với danh sách
         </div>

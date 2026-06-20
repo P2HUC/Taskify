@@ -39,7 +39,7 @@ const TermsPage = () => {
 
         <div className="prose prose-neutral max-w-none space-y-6 text-sm md:text-base leading-relaxed text-neutral-600">
           <p>
-            Chào mừng bạn đến với Z-up! Các Điều khoản Dịch vụ này (&quot;Điều khoản&quot;) điều chỉnh việc bạn truy cập và sử dụng trang web, ứng dụng và dịch vụ của chúng tôi. Vui lòng đọc kỹ trước khi sử dụng nền tảng của chúng tôi.
+            Chào mừng bạn đến với Z-UP! Các Điều khoản Dịch vụ này (&quot;Điều khoản&quot;) điều chỉnh việc bạn truy cập và sử dụng trang web, ứng dụng và dịch vụ của chúng tôi. Vui lòng đọc kỹ trước khi sử dụng nền tảng của chúng tôi.
           </p>
 
           <h2 className="text-lg md:text-xl font-semibold text-neutral-900 pt-4 border-t">
@@ -53,7 +53,7 @@ const TermsPage = () => {
             2. Mô tả Dịch vụ
           </h2>
           <p>
-            Z-up là một phần mềm quản lý công việc trên nền tảng web được thiết kế để giúp các nhóm cộng tác, tổ chức các dự án và quản lý các bảng công việc, danh sách, thẻ và danh sách kiểm tra.
+            Z-UP là một phần mềm quản lý công việc trên nền tảng web được thiết kế để giúp các nhóm cộng tác, tổ chức các dự án và quản lý các bảng công việc, danh sách, thẻ và danh sách kiểm tra.
           </p>
 
           <h2 className="text-lg md:text-xl font-semibold text-neutral-900 pt-4 border-t">
@@ -91,7 +91,7 @@ const TermsPage = () => {
             6. Giới hạn Trách nhiệm
           </h2>
           <p>
-            Trong mọi trường hợp, Z-up, cũng như các giám đốc, nhân viên, đối tác, đại lý, nhà cung cấp hoặc chi nhánh của chúng tôi, sẽ không chịu trách nhiệm cho bất kỳ thiệt hại gián tiếp, ngẫu nhiên, đặc biệt, mang tính hệ quả hoặc trừng phạt nào, bao gồm nhưng không giới hạn ở tổn thất lợi nhuận, dữ liệu, sử dụng, uy tín hoặc các tổn thất vô hình khác, phát sinh từ việc bạn truy cập, sử dụng hoặc không thể truy cập hoặc sử dụng Dịch vụ.
+            Trong mọi trường hợp, Z-UP, cũng như các giám đốc, nhân viên, đối tác, đại lý, nhà cung cấp hoặc chi nhánh của chúng tôi, sẽ không chịu trách nhiệm cho bất kỳ thiệt hại gián tiếp, ngẫu nhiên, đặc biệt, mang tính hệ quả hoặc trừng phạt nào, bao gồm nhưng không giới hạn ở tổn thất lợi nhuận, dữ liệu, sử dụng, uy tín hoặc các tổn thất vô hình khác, phát sinh từ việc bạn truy cập, sử dụng hoặc không thể truy cập hoặc sử dụng Dịch vụ.
           </p>
 
           <h2 className="text-lg md:text-xl font-semibold text-neutral-900 pt-4 border-t">
@@ -105,7 +105,7 @@ const TermsPage = () => {
             8. Luật Điều chỉnh
           </h2>
           <p>
-            Các Điều khoản này sẽ được điều chỉnh và giải thích theo luật pháp của khu vực tài phán nơi Z-up hoạt động, bất kể các quy định về xung đột pháp luật.
+            Các Điều khoản này sẽ được điều chỉnh và giải thích theo luật pháp của khu vực tài phán nơi Z-UP hoạt động, bất kể các quy định về xung đột pháp luật.
           </p>
 
           <h2 className="text-lg md:text-xl font-semibold text-neutral-900 pt-4 border-t">

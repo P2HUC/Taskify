@@ -55,7 +55,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
             price_data: {
               currency: "USD",
               product_data: {
-                name: "Z-up Pro",
+                name: "Z-UP Pro",
                 description: "Unlimited boards for your organization"
               },
               unit_amount: 200,

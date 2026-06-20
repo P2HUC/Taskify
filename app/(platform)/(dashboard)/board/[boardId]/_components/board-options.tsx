@@ -36,9 +36,9 @@ export const BoardOptions = ({ id }: BoardOptionsProps) => {
         </Button>
       </PopoverTrigger>
       <PopoverContent 
-        className="px-0 pt-3 pb-3" 
+        className="w-72 max-w-[calc(100vw-20px)] px-0 pt-3 pb-3" 
         side="bottom" 
-        align="start"
+        align="end"
       >
         <div className="text-sm font-medium text-center text-neutral-600 pb-4">
           Thao tác với bảng
