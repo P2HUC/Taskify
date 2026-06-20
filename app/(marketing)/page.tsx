@@ -48,7 +48,9 @@ const MarketingPage = () => {
           "text-sm md:text-xl text-neutral-500 mt-6 max-w-md md:max-w-2xl text-center mx-auto leading-relaxed",
           textFont.className,
         )}>
-          Cùng cộng tác, quản lý dự án và đạt tới những đỉnh cao năng suất mới. Từ những tòa nhà cao tầng đến văn phòng tại gia, cách thức nhóm của bạn làm việc là độc nhất - hãy hoàn thành tất cả với Z-up.
+          <p className="text-neutral-700 text-sm md:text-base">
+            Z-UP là nền tảng quản lý dự án và cộng tác thông minh giúp tối ưu hóa năng suất cho mọi đội ngũ. Dù bạn đang vận hành một doanh nghiệp lớn hay triển khai dự án cá nhân tại nhà, cách thức làm việc của bạn luôn là duy nhất — và Z-UP ở đây để đồng hành, giúp bạn hiện thực hóa mọi mục tiêu.
+          </p>
         </div>
         <div className="mt-8 flex flex-col sm:flex-row items-center gap-4">
           <Button size="lg" asChild>
