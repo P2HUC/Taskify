@@ -1,10 +1,11 @@
 import { auth } from "@clerk/nextjs";
+import { cache } from "react";
 
 import { db } from "@/lib/db";
 
 const DAY_IN_MS = 86_400_000;
 
-export const checkSubscription = async () => {
+export const checkSubscription = cache(async () => {
   const { orgId } = auth();
 
   if (!orgId) {
@@ -32,4 +33,4 @@ export const checkSubscription = async () => {
     orgSubscription.stripeCurrentPeriodEnd?.getTime()! + DAY_IN_MS > Date.now()
 
   return !!isValid;
-};
+});
